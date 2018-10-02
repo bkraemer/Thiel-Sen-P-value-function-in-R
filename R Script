@@ -1,3 +1,5 @@
+library(zyp)
+
 senP<-function(x,y,reps){ #defines the function arguments. x are the x values from the thiel-sen slope, y are the y values from the thiel-sen slope, and reps are the number of repetitions to use for the bootstrap.
   slopes<-zyp.sen(y~x)$slopes #finds all pairwise slopes from the thiel-sen regression
   intercepts<-zyp.sen(y~x)$intercepts #finds all intercepts from the thiel-sen regression
