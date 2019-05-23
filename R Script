@@ -8,12 +8,15 @@ senP<-function(x,y,reps){ #defines the function arguments. x are the x values fr
   n<-length(x) #determines the size of each sample of pairwise slopes to be used for calcualting the one-sample wilcox rank test.
   
   for (i in 1:reps){ #sets the number of repetitions defined in the third argument of the function
-  slope_ps[i]<-wilcox.test(sample(slopes,size=n,replace=TRUE))$p.value #prints each p value to the previously blank vector
-  intercept_ps[i]<-wilcox.test(sample(intercepts,size=n,replace=TRUE))$p.value #prints each p value to the previously blank vector
+    slope_ps[i]<-wilcox.test(sample(slopes,size=n,replace=TRUE))$p.value #prints each p value to the previously blank vector
+    intercept_ps[i]<-wilcox.test(sample(intercepts,size=n,replace=TRUE))$p.value #prints each p value to the previously blank vector
   }
   
-  slope_p<-median(slope_ps) #the final p value for slope is calcalyted as the median p value from vector slope_p
-  intercept_p<-median(intercept_ps) #the final p value for intercept is calculated as the median p value from vector intercept_p
-  result <- list(slope_p=slope_p,intercept_p=intercept_p) #sets the result as list of the slope final p and the intercept final p
+  slope_p<-median(slope_ps,na.rm=TRUE) #the final p value for slope is calcalyted as the median p value from vector slope_p
+  intercept_p<-median(intercept_ps,na.rm=TRUE) #the final p value for intercept is calculated as the median p value from vector intercept_p
+  slope<-median(slopes,na.rm=TRUE) #the final p value for slope is calcalyted as the median p value from vector slope_p
+  intercept<-median(intercepts,na.rm=TRUE) #the final p value for intercept is calculated as the median p value from vector intercept_p
+  
+  result <- list(slope_p=slope_p,intercept_p=intercept_p,slope=slope,intercept=intercept) #sets the result as list of the slope final p and the intercept final p
   return(result) #returns the result as an object to be accessed outside of the function
 }
